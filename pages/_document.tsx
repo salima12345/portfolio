@@ -13,7 +13,7 @@ export default function Document() {
         <meta property="og:description" content="Welcome to my portfolio! Enjoy your visit" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://portfolio-salima-el-khalidis-projects.vercel.app/" />
+        <meta property="og:url" content="https://www.salimaelkhalidi.com/" />
         <title>Salima El Khalidi</title>
       </Head>
       <body className="font-primary">
