@@ -17,7 +17,7 @@ const Navbar = () => {
     return (
         <div className='sticky top-0 z-20 w-full bg-gradient-to-r from-black to-[#1A0B2E] backdrop-blur-md flex items-center justify-center h-[70px]'>
             <div className='relative w-[80%] md:mx-5 flex items-center justify-between mt-2'>
-                <Link href="/" passHref>
+                <Link href="#top" passHref>
                     <div className="transition-all duration-200 hover:rotate-180 inline-block pb-1 cursor-pointer">
                         <Image src="/LogoLight.png" alt="Logo" width={50} height={50} />
                     </div>
