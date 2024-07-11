@@ -11,8 +11,8 @@ const Navbar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className={`fixed top-0 left-0 z-20 w-full bg-gradient-to-r from-black to-[#1A0B2E] backdrop-blur-md transition-all duration-300 ${isExpanded ? 'h-screen' : 'h-[70px]'}`}>
-            <div className='relative w-[80%] flex items-center justify-between h-[70px] mx-auto'>
+        <div className={`fixed top-0 left-0 z-20 w-full bg-gradient-to-r from-black to-[#1A0B2E] backdrop-blur-md transition-all duration-300 py-3  ${isExpanded ? 'h-screen' : 'h-[70px]'}`}>
+            <div className='relative w-[80%] flex items-center justify-between h-[70px] mx-auto '>
                 <Link href="#top" passHref>
                     <div className="transition-all duration-200 hover:rotate-180 inline-block pb-1 cursor-pointer">
                         <Image src="/LogoLight.png" alt="Logo" width={50} height={50} />
