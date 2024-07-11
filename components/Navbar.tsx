@@ -15,7 +15,7 @@ const Navbar = () => {
             <div className='relative w-[80%] flex items-center justify-between h-[70px] mx-auto'>
                 <Link href="#top" passHref>
                     <div className="transition-all duration-200 hover:rotate-180 inline-block pb-1 cursor-pointer">
-                        <Image src="/LogoLight.png" alt="Logo" width={40} height={40} />
+                        <Image src="/LogoLight.png" alt="Logo" width={50} height={50} />
                     </div>
                 </Link>
                 <div className='md:flex hidden items-center gap-8 ml-auto'>
