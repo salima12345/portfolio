@@ -9,7 +9,7 @@ import Footer from '@/components/Footer'
 
 const HomePage = () => {
     return (
-        <div className='overflow-y-auto overflow-x-hidden bg-gradient-to-r from-black to-[#1A0B2E] h-screen'>
+        <div className='overflow-y-auto overflow-x-hidden bg-gradient-to-r from-black to-[#1A0B2E] min-h-screen'>
             <div id="top"></div>
             <Navbar />
             <Hero />
