@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import axios from 'axios';
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from './ui/form'; // Adjust the import path if needed
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import axios from 'axios';
 
 const schema = z.object({
   email: z.string().min(1, {
@@ -17,22 +18,25 @@ const schema = z.object({
   }),
 });
 
+type ContactFormValues = z.infer<typeof schema>;
+
 const Contact: React.FC = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm({
+  const methods = useForm<ContactFormValues>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: any) => {
+  const {
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = methods;
+
+  const onSubmit = async (data: ContactFormValues) => {
     try {
       await axios.post('/api/contact', data);
       alert("Thank you for your message! I appreciate your interest and will get in touch with you quickly.");
@@ -52,53 +56,72 @@ const Contact: React.FC = () => {
       >
         Get In Touch
       </motion.h1>
-      <motion.form
-        onSubmit={handleSubmit(onSubmit)}
-        initial={{ opacity: 0, y: 50 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className='space-y-4'
-      >
-        <motion.div
+      <FormProvider {...methods}>
+        <motion.form
+          onSubmit={handleSubmit(onSubmit)}
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className='space-y-0'
         >
-          <Input
-            type='email'
-            placeholder='Your Email'
-            {...register('email')}
-            className={`${errors.email ? 'border-red-500' : 'border-input'}`}
-          />
-          {errors.email && typeof errors.email.message === 'string' && (
-            <p className='text-red-500 text-sm'>{errors.email.message}</p>
-          )}
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
-          <Textarea
-            placeholder='Your Message'
-            {...register('message')}
-            className={`${errors.message ? 'border-red-500' : 'border-input'}`}
-          />
-          {errors.message && typeof errors.message.message === 'string' && (
-            <p className='text-red-500 text-sm'>{errors.message.message}</p>
-          )}
-        </motion.div>
-        <motion.button
-          type='submit'
-          className='text-[#8750F7] py-3 px-8 border border-[#8750F7] rounded-3xl hover:bg-[#8750F7] hover:text-white transition-all font-medium w-[200px]'
-          disabled={isSubmitting}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 1.0 }}
-        >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
-        </motion.button>
-      </motion.form>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <FormField
+              name='email'
+              render={({ field }: { field: any }) => (
+                <FormItem > 
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='email'
+                      placeholder='Your Email'
+                      {...field}
+                      className={`border ${errors.email ? 'border-red-500' : 'border-input'}`}
+                    />
+                  </FormControl>
+                  {errors.email && <FormMessage>{errors.email.message}</FormMessage>}
+                </FormItem>
+              )}
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.8 }}
+           
+          >
+            <FormField
+              name='message'
+              render={({ field }: { field: any }) => (
+                <FormItem > 
+                  <FormLabel>Message</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder='Your Message'
+                      {...field}
+                      className={`border   ${errors.message ? 'border-red-500  ' : 'border-input  mb-5'}`}
+                    />
+                  </FormControl>
+                  {errors.message && <FormMessage>{errors.message.message}</FormMessage>}
+                </FormItem>
+              )}
+            />
+          </motion.div>
+          <motion.button
+            type='submit'
+            className='text-[#8750F7] py-3 px-8 border border-[#8750F7] rounded-3xl hover:bg-[#8750F7] hover:text-white transition-all font-medium w-[200px] '
+            disabled={isSubmitting}
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 1.0 }}
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </motion.button>
+        </motion.form>
+      </FormProvider>
     </div>
   );
 }
