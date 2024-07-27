@@ -73,13 +73,13 @@ const Contact: React.FC = () => {
               name='email'
               render={({ field }: { field: any }) => (
                 <FormItem > 
-                  <FormLabel>Email</FormLabel>
+                  {!errors.email && <FormLabel>Email</FormLabel>}
                   <FormControl>
                     <Input
                       type='email'
                       placeholder='Your Email'
                       {...field}
-                      className={`border ${errors.email ? 'border-red-500' : 'border-input'}`}
+                      className={`border ${errors.email ? 'border-red-500 mb-1' : 'border-input'}`}
                     />
                   </FormControl>
                   {errors.email && <FormMessage>{errors.email.message}</FormMessage>}
@@ -97,12 +97,12 @@ const Contact: React.FC = () => {
               name='message'
               render={({ field }: { field: any }) => (
                 <FormItem > 
-                  <FormLabel>Message</FormLabel>
+                  {!errors.message && <FormLabel>Message</FormLabel>}
                   <FormControl>
                     <Textarea
                       placeholder='Your Message'
                       {...field}
-                      className={`border   ${errors.message ? 'border-red-500  ' : 'border-input  mb-5'}`}
+                      className={`border  ${errors.message ? 'border-red-500 mb-1' : 'border-input mb-5 '}`}
                     />
                   </FormControl>
                   {errors.message && <FormMessage>{errors.message.message}</FormMessage>}
