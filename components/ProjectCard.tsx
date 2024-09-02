@@ -42,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <p className='text-white '>{project.projectDesc}</p>
         <Link href={project.projectLink} target='_blank' rel='noopener noreferrer'>
           <button className='text-[#8750F7] py-3 px-8 my-5 border border-[#8750F7] rounded-3xl hover:bg-[#8750F7] hover:text-white transition-all font-medium'>
-            Check it out
+            See more
           </button>
         </Link>
       </motion.div>

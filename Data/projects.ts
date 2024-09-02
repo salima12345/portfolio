@@ -1,8 +1,7 @@
-// data/projects.ts
 
 const projectsData = [
     {
-      projectLink: "https://tabdiary-staging.up.railway.app/",
+      projectLink: "https://staging.tabdiary.com/",
       projectImages: [
         "/images/ListView.jpeg",
          "/images/Status.jpeg",
