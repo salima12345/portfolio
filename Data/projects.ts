@@ -42,7 +42,6 @@ const projectsData = [
       projectDesc: "This platform, built with TypeScript, Next.js, and tRPC (T3 Stack), is designed to streamline and optimize reservation management for restaurants. Currently in development, it prioritizes ease of use and intuitive navigation, ensuring users get exactly what they need without unnecessary complexity."
     },
    
-    // More projects...
   ];
   
   export default projectsData;
